@@ -4,4 +4,6 @@ FROM ubuntu:latest
 ENV DEBIAN_FRONTEND noninteractive
 # 安装systemd后，就可以在 Dockerfile 或者 docker run 命令中使用 sleep infinity,容器就不会因没有前台常驻线程而刚启动就结束退出
 RUN apt-get update && apt-get install -y curl net-tools vim systemd wget lrzsz git gcc cmake docker.io zip bridge-utils
-CMD ["/bin/sh" "-c" "sleep infinity"]
+# CMD ["/bin/sh","-c","sleep infinity"] 同样可行
+# 自动进入无限休眠状态，docker run若有参数会有可能覆盖此命令
+CMD ["sleep","infinity"]
